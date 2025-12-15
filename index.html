@@ -2,13 +2,124 @@
 <html lang="pl">
     <head>
        <meta charset = "UTF-8"/>
-       <title>Interaktywna wizualizacja urządzeń placówki medycznej</title>
+       <title>Dziennik ciśnienia</title>
        <!--Styl CSS-->
        <link rel="stylesheet" href="style.css" />
         <!--Skrypt JavaScript-->
-         <script src="Interaktywnosc.js"></script>
-    </head>   
+        <script src="Interaktywnosc.js" defer></script>
+        <link rel="icon" type="image/png" href="images/Menu/SiteIcon.png"/>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    </head>
+
     <body>
-        <h1>Interaktywna wizualizacja urządzeń w placówce medycznej</h1>
+        <header class="topbar">
+            <h1>Dziennik ciśnienia</h1>
+            <nav class="navigacja" id="nawigacja">
+                <form action="">
+                    <ul>
+                        <li>
+                            <input class="find" type="text" id="find" name="find"/>
+                            <img id="Burger" class="BurgerIcon icon" src="images/Menu/BurgerIcon.svg" alt="Menu" />
+                        </li>
+                    </ul>
+                </form>
+                
+            </nav>
+        </header>
+        <main>
+            <h1>Dziennik ciśnienia tętniczego i pulsu z wizualizacją danych (należy zbierać dane, które osoba z nadciśnieniem powinna kontrolować w ciągu każdego dnia)</h1>
+            <section class="container">
+                <h2>cokolwiek</h2>
+            </section class="">
+            <h2>Wykres ciśnienia</h2>
+
+            <section>
+                <canvas id="pressureChart"></canvas>
+            </section>
+            <section id="Calendar" class="Calendar">
+                <h2>Miejsce na Kalendarz</h2>
+                
+            </section>
+            <section class="LastSection">
+                <!-- Modal logowania -->
+                <div id="loginModal" class="modal">
+                <div class="modal-content">
+                    <img src="images/ExitButton.svg" alt="Zamknij" class="exit-button icon" onclick="closeModal()" />
+
+                    <!-- Formularz logowania -->
+                    <form id="loginForm" action="login.php" method="POST">
+                        <h2>Zaloguj się</h2>
+                        <label for="username">Nazwa użytkownika:</label>
+                        <input type="text" id="username" name="username" required />
+
+                        <label for="password">Hasło:</label>
+                        <div class="password-container">
+                            <input type="password" id="passwordLogin" name="password" required />
+                            <img id="eyeIconLogin" class="icon" src="images/CrossedEye.png" alt="Pokaż/Ukryj" onclick="togglePassword('passwordLogin','eyeIconLogin')" />
+                        </div>
+
+
+                        <button type="submit">Zaloguj się</button>
+                        <p class="register-link">
+                            Nie masz konta? <a href="#" onclick="showRegister()">Zarejestruj się</a>
+                        </p>
+                    </form>
+
+                    <!-- Formularz rejestracji (ukryty domyślnie) -->
+                    <form id="registerForm" action="register.php" method="POST" style="display:none;">         
+                        <h2>Rejestracja</h2>
+                        <label for="newUsername">Nazwa użytkownika:</label>
+                        <input type="text" id="newUsername" name="username" required />
+
+                        <label for="newPassword">Hasło:</label>
+                        <div class="password-container">
+                            <input type="password" id="passwordRegister" name="password" required />
+                            <img id="eyeIconRegister" class="icon" src="images/CrossedEye.png" alt="Pokaż/Ukryj" onclick="togglePassword('passwordRegister','eyeIconRegister')" />
+                        </div>
+
+                        <button type="submit">Zarejestruj się</button>
+                        <p class="login-link">
+                            Masz już konto? <a href="#" onclick="showLogin()">Zaloguj się</a>
+                        </p>
+                    </form>
+                </div>
+                </div>
+                <div class="Menu-box" id="Menu-box" style="display: none;">
+                    <form>
+                        <ul>
+                            <li class="special-menu"><a href="#">
+                                <div id="profile-icon" class="profile-icon icon" ></div>
+                                Profil</a>
+                            </li>
+                             <li><a href="index.html">
+                                <span id="home-icon" class="home-icon icon" ></span>
+                                <span class="label">Strona główna</span></a>
+                            </li>
+                            <li><a href="#">
+                                <span id="stats-icon" class="stats-icon icon" ></span>
+                                <span class="label">Statystyki</span></a></li>
+                            <li><a href="#">
+                                <span id="settings-icon" class="settings-icon icon" ></span>
+                                <span class="label">Ustawienia</span></a>
+                            </li>
+                            <li><a href="#">
+                                <span id="calendar-icon" class="calendar-icon icon" ></span>
+                                <span class="label">Kalendarz</span></a></li>
+                            <li class="special-menu"><a href="#">
+                                <span id="mode-icon" class="mode-icon icon" ></span>
+                                <span class="label">Tryb ciemny/jasny</span>
+                                <div id="switchOn-icon"></div></a>
+                            </li>
+                            <li><a href="#" onclick="openModal()">
+                                <span id="login-icon" class="login-icon icon" ></span>
+                                <span class="label">Zaloguj się</span></a></li>
+                        </ul>
+                    </form>
+                </div>
+                
+
+            </section>
+        </main>
     </body>
 </html>
